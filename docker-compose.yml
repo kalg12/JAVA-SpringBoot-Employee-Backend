@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword        # Change this for security
+      MYSQL_DATABASE: my_database              # Default DB to create
+      MYSQL_USER: my_user                      # Non-root user
+      MYSQL_PASSWORD: my_password              # Password for non-root user
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - my_network
+
+volumes:
+  mysql_data:
+
+networks:
+  my_network:
+    driver: bridge
